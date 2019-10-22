@@ -1,0 +1,92 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Robs_Blog.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<!--Carousel ----------------------------------------------------------------------------------------------->
+<section class="site-section pt-5 pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!--COde to be change -->
+                <div class="owl-carousel owl-theme home-slider">
+                    @foreach (var BlogPost in Model)
+                    {
+                        <div>
+                            <a href=@Url.Action("Details", "BlogPosts", new { slug = BlogPost.Slug }) class="a-block d-flex align-items-center height-lg" style="background-image: url('@BlogPost.ImagePath'); ">
+                                <div class="text half-to-full">
+                                    @*<span class="category mb-5">Food</span>*@
+                                    <div class="post-meta">
+                                        <span class="author mr-2"><img src="~/Images/profile_Placeholder.png" alt=""></span>&bullet;
+                                        <span class="mr-2">@BlogPost.Created.ToString("MMM dd, yyyy")</span> &bullet;
+                                        <span class="ml-2"><span class="fa fa-comments"></span>@BlogPost.Comments.Count.ToString()</span>
+
+                                    </div>
+                                    <h3>@Html.Raw(BlogPost.Title)</h3>
+                                    <p>@Html.Raw(BlogPost.Abstract)</p>
+                                    @*p>@Html.Raw(BlogPost.BlogPostBody)</p>*@
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--END CAROUSAL CONTENT------------/----------START CONTENT------------------------------>
+
+<section class="site-section py-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="mb-4">Latest Posts</h2>
+            </div>
+        </div>
+        <div class="row blog-entries">
+            <div class="col-md-12 col-lg-8 main-content">
+                <div class="row">
+                    <!--MAIN CONTENT: BLOGPOSTS-->
+                    @foreach (var BlogPost in Model)
+                    {
+                        <div class="col-md-6">
+                            <a href=@Url.Action("Details", "BlogPosts", new { slug = BlogPost.Slug }) class="blog-entry element-animate" data-animate-effect="fadeIn">
+                                @if (BlogPost.ImagePath != null)
+                                {
+                                    <img class="img-responsive" src="@BlogPost.ImagePath" alt="" />
+                                }
+                                else
+                                {
+                                    <img class="img-responsive" src="~/Images/imagePlaceholder.jpg" />
+                                }
+
+                                @*<img src="~/Images/img_5.jpg" alt="Image placeholder">*@
+                                <div class="blog-content-body">
+                                    <div class="post-meta">
+                                        <span class="author mr-2"><img src="~/Images/profile_Placeholder.png" alt="Colorlib"> @Html.ActionLink("Roberto Hernandez", "About", "Home") </span>&bullet;
+                                        <span class="mr-2">@BlogPost.Created.ToString("MMM dd, yyyy") </span> &bullet;
+                                        <span class="ml-2"><span class="fa fa-comments"></span> @BlogPost.Comments.Count.ToString() </span>
+                                    </div>
+                                    <h2>@BlogPost.Title</h2>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+
+                    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+
+
+                </div><!-- END main-content -->
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page, searchStr = ViewBag.Search }));
+            </div>
+        </div>
+    </div>
+</section>

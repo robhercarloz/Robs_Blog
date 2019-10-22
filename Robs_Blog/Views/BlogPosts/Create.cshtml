@@ -1,0 +1,82 @@
+﻿@model Robs_Blog.Models.BlogPost
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 style="text-align:center">Create Blogpost</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p style="text-align:center">Build blogpost below don't forget to publish!</p>
+            <hr />
+            @using (Html.BeginForm("Create", "BlogPosts", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <!--TITLE INPUT-->
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!--SUBTITLE/ABSTRACT INPUT-->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Abstract, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Abstract, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Abstract, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!--BLOGPOST BODY-->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BlogPostBody, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.BlogPostBody, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.BlogPostBody, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!--IMAGE UPLOAD-->
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <h6>Upload Image</h6>
+                    </div>
+                    <div class="col-md-10">
+
+                    </div>
+                </div>
+
+                <input name="image" type="file" class="form-control" id="fileupload" />
+
+
+                <!--CHECK BOX PUBLISHED-->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Published, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Published)
+                            @Html.ValidationMessageFor(model => model.Published, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <!--SUBMIT BUTTON-->
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+                <!--SHOW LIST-->
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            }
+        </div>
+    </div>
+</div>

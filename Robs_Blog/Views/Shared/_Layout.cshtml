@@ -1,0 +1,198 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Roberto's Blog &mdash; Rob's Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
+
+    <link rel="shortcut icon" href="Images/favicon-32x32.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="Images/apple-touch-icon.png">
+
+    @*<link rel="stylesheet" href="css/bootstrap.css">*@
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="css/animate.css">*@
+    <link href="~/Content/animate.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="css/owl.carousel.min.css">*@
+    <link href="~/Content/owl.carousel.min.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="fonts/ionicons/css/ionicons.min.css">*@
+    <link href="~/Content/ionicons.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="fonts/fontawesome/css/font-awesome.min.css">*@
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    @*<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">*@
+    <link href="~/Content/flaticon.css" rel="stylesheet" />
+
+    <!-- Theme Style -->
+    @*<link rel="stylesheet" href="css/style.css">*@
+    <link href="~/Content/style.css" rel="stylesheet" />
+
+</head>
+<body>
+
+
+
+    <div class="wrap">
+
+        <header role="banner">
+            <div class="top-bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-9 social">
+                            <a href="https://github.com/robhercarloz"><span class="fa fa-github"></span></a>
+                            <a href="https://www.linkedin.com/in/roberto-hernandez-553369104/"><span class="fa fa-linkedin"></span></a>                            
+                        </div>
+                        <div class="col-3">
+                            @using (Html.BeginForm("Index", "Home", FormMethod.Get, htmlAttributes: new { @class = "form" }))
+                            {
+                                <div class="col-3 search-top">
+                                    <!-- <a href="#"><span class="fa fa-search"></span></a> -->
+                                    <form action="#" class="search-top-form">                                        
+                                        <input id="searchStr" name="searchStr" class="input-block-level" type="text" placeholder="Type keyword to search...">
+                                        <button id="searchStr" name="searchStr" class="btn btn-success"type="submit" style="text-align:center; padding: 4px 30px 4px 15px">
+                                            SEARCH
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--LOGO-->
+            <div class="container logo-wrap">
+                <div class="row pt-5">
+                    <div class="col-12 text-center">
+                        <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
+                        <h1 class="site-logo"><a href=@Url.Action("Index", "Home")>Rob's Blog</a></h1>
+                    </div>
+                </div>
+            </div>
+            <!--NAVIGATION-->
+            <nav class="navbar navbar-expand-md  navbar-light bg-light">
+                <div class="container">
+
+                    <div class="collapse navbar-collapse" id="navbarMenu">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Index", "Home")>Home</a>
+                            </li>
+
+                            @if (User.IsInRole("Admin"))  //|| (User.IsInRole("Moderator")  to let moderator see
+                            {
+                            <li class="nav-item">
+                                @Html.ActionLink("Create Posts", "Create", "BlogPosts", null, new { @class = "nav-link" })
+                            </li>
+                            }
+
+                             <!--View blog post list-->
+                            @if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Blog List", "index", "BlogPosts", null, new { @class = "nav-link" })    
+                                </li>
+                            }
+                            
+
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("About", "Home")>About</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href=@Url.Action("Contact", "Home")>Contact</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://robertochprofile.azurewebsites.net/">Web Portfolio</a>
+                            </li>
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                            @Html.ActionLink("LogOff", "CustomLogOff", "Account", null, new { @class="nav-link"})
+                            }
+                            else
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Log-in/Register</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdown04">                                    
+                                        <a class="dropdown-item" href=@Url.Action("Login", "Account")>Log In</a>
+                                        <a class="dropdown-item" href=@Url.Action("Register", "Account")>Register</a>
+                                    </div>
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+        <!-- END header -->
+
+        <!--Section-->
+        @RenderBody()
+        <!-- END section -->
+
+       
+        <!--Footer-->
+        <footer class="site-footer">
+            <div class="container">                
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p class="small">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+                            <script>document.write(new Date().getFullYear());</script> All Rights Reserved | Created by: <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <a href=@Url.Action("About", "Home")>Edited by: Roberto Hernandez</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- END footer -->
+
+    </div>
+
+    <!-- loader -->
+    <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214" /></svg></div>
+
+    @*<script src="js/jquery-3.2.1.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    @*<script src="js/jquery-migrate-3.0.0.js"></script>*@
+    <script src="~/Scripts/jquery-migrate-3.0.0.js"></script>
+    @*<script src="js/popper.min.js"></script>*@
+    <script src="~/Scripts/popper.min.js"></script>
+    @*<script src="js/bootstrap.min.js"></script>*@
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @*<script src="js/owl.carousel.min.js"></script>*@
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    @*<script src="js/jquery.waypoints.min.js"></script>*@
+    <script src="~/Scripts/jquery.waypoints.min.js"></script>
+    @*<script src="js/jquery.stellar.min.js"></script>*@
+    <script src="~/Scripts/jquery.stellar.min.js"></script>
+    
+    @*<script src="js/main.js"></script>*@
+    <script src="~/Scripts/main.js"></script>
+
+    <!--TINYMCE-->
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script src="~/Scripts/tinymce/jquery.tinymce.min.js"></script>
+
+    <script>
+        $(function () {
+            tinymce.init({
+                selector: '#BlogPostBody'
+            });
+        });
+       
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

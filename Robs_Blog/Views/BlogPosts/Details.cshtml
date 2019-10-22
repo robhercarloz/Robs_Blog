@@ -1,0 +1,107 @@
+﻿@model Robs_Blog.Models.BlogPost
+@{
+    ViewBag.Title = "Details";
+}
+
+<section class="site-section py-lg">
+    <div class="container">
+        <div class="row blog-entries element-animate">
+            <div class="col-md-12 col-lg-8 main-content">
+                @if (Model.ImagePath != null)
+                {
+                    <img class="img-fluid mb-5" src="@Model.ImagePath" alt="" />
+                }
+                <div class="post-meta">
+                    <span class="author mr-2">@Html.ActionLink("Roberto Hernandez", "About", "Home")</span>&bullet;
+                    <span class="mr-2"> @Html.DisplayNameFor(model => model.Created), @Model.Created.ToString("MMM dd, yyyy")</span> &bullet;
+                    <span class="ml-2"><span class="fa fa-comments"></span>@Model.Comments.Count</span>
+                </div>
+                <h1 class="mb-4">@Html.DisplayFor(model => model.Title)</h1>
+
+                <div class="post-content-body">
+                    <p>@Html.Raw(Model.BlogPostBody)</p>
+                    <div class="row mb-5">
+                    </div>
+                </div>
+
+                <h3>COMMENTS</h3>
+                <hr style="border:1px solid black;" />
+                <!--loop over ICollection of comments to display all for blogposts -->
+                @foreach (var comment in Model.Comments.OrderByDescending(c => c.Created))
+                {
+                    <div class="container mt-3">
+                        <h2>Author: @comment.Author.Email</h2>
+                        <div class="media">
+                            <img src="~/Images/profile_Placeholder.png" class="align-self-start mr-3" style="width:60px" />
+                            <div class="media-body">
+                                <h4>Written: @comment.Created.ToString("MMM dd, yyyy")</h4>
+                                @comment.CommentBody
+                                @if (User.IsInRole("Admin") || (User.IsInRole("Moderator")))
+                                {
+
+                                    {
+                                        <br />
+                                        @Html.AntiForgeryToken()
+                                        @Html.ActionLink("Edit", "Edit", "Comments", new { id = comment.Id }, null) <br />
+                                        @Html.ActionLink("Delete", "Delete", "Comments", new { id = comment.Id }, null)//change slug to id
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!--Comments-->
+                <hr style="border:2px solid black;" />
+                <h3>
+                    Add comment:
+                </h3>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div id="Comment">
+                        @using (Html.BeginForm("Create", "Comments", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.Hidden("BlogPostId", Model.Id)
+
+                            <div class="row">
+                                <div class="offset-3 col-md-6">
+                                    @Html.TextArea("CommentBody", new { rows = 5, cols = 50 })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="offset-3 col-md-6">
+                                    <button type="submit" class="btn btn-sm btn-dark">Add</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                <hr style="border: 2px solid black" />
+
+
+            </div>
+            <!-- END main-content -->
+            <!--Sidebar-->
+            <div class="col-md-12 col-lg-4 sidebar">                
+                <div class="sidebar-box">
+                    <div class="bio text-center">
+                        <img src="~/Images/blackWhiteCode.jpg" alt="Image Placeholder" class="img-fluid">
+                        <div class="bio-body">
+                            <h2>Roberto Hernandez</h2>
+                            <p>
+                                As my time in high school was closely coming to an end, I wasn’t sure what I would be doing after graduating. Was I going to go straight to work or was I
+                                going to continue my education? Little did I know that programming had been the one calling for me as not everyone enjoys it, but I was surprised that having
+                                litte to no experience or understanding of what code was I quickly became fascinated with it and became a code enthusiast continuing school and getting me Associates in Computer Programming.
+                            </p>
+                            <p>
+                                <a href=@Url.Action("About", "Home") class="btn btn-primary btn-sm rounded">More About Me</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- END sidebar-box -->
+            </div>
+        </div>
+    </div>
+</section>

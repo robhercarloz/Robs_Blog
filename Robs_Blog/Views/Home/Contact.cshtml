@@ -1,0 +1,78 @@
+﻿@model Robs_Blog.Models.EmailModel
+
+
+
+    <section class="site-section">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h1>Contact Me</h1>
+                </div>
+            </div>
+            <div class="row blog-entries">
+                <div class="col-md-12 col-lg-8 main-content">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FromName, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.FromName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.FromName)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.FromEmail, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.FromEmail, new { @class = "form-control", placeholder = "example@email.com" })
+                                @Html.ValidationMessageFor(m => m.FromEmail)
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.subject, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.subject, new { @class = "form-control", placeholder = "subject" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Body, new { @class = "col-md-2 control-label" })
+                            <div id="editor" class="col-md-10">
+                                @Html.EditorFor(m => m.Body, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-primary" value="Send" />
+                            </div>
+                        </div>
+
+                    }
+                </div>
+                <!-- END main-content -->
+                <div class="col-md-12 col-lg-4 sidebar">                    
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <div class="bio text-center">
+                            <img src="~/Images/profile_Placeholder.png" alt="Rob" class="img-fluid">
+                            <div class="bio-body">
+                                <h2>Roberto Hernandez</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
+                                <p><a href=@Url.Action("About", "Home") class="btn btn-primary btn-sm">About Me</a></p
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+                </div>
+            </div>
+        </div>
+    </section>
+    @*<script>
+        $(function () {
+            tinymce.init({
+                selector: '#editor'
+            });
+        });
+
+    </script>*@
