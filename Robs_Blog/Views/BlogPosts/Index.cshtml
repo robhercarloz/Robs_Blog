@@ -4,87 +4,85 @@
     ViewBag.Title = "Index";
 }
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 style="text-align: center; padding: 10px">BLOG LIST</h3>
-                <p>
-                    @Html.ActionLink("Create New", "Create")
-                </p>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 style="text-align: center; padding: 10px">BLOG LIST</h3>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Created)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Updated)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Title)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Slug)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Abstract)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.BlogPostBody)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.ImagePath)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.Published)
-                        </th>
-                        <th></th>
-                    </tr>
-                    @*cycle through every Blogpost rescord in the set of blogpost records displaying the property
-            values fr each, one at a time.*@
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Created)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Updated)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Slug)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Abstract)
-                            </td>
-                            <td>
-                                @Html.Raw(item.BlogPostBody)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ImagePath)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Published)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "Edit", new { Slug = item.Slug }) |
-                                @Html.ActionLink("Details", "Details", new { Slug = item.Slug }) |
-                                @Html.ActionLink("Delete", "Delete", new { Slug = item.Slug })
-                            </td>
-                        </tr>
-                    }
-
-                </table>
-
-            </div>
-        </div>
-
     </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table" id="datatable">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Created)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Updated)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Slug)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Abstract)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BlogPostBody)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ImagePath)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Published)
+                    </th>
+                    <th></th>
+                </tr>
+                @*cycle through every Blogpost rescord in the set of blogpost records displaying the property
+                    values fr each, one at a time.*@
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Created)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Updated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Slug)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Abstract)
+                        </td>
+                        <td>
+                            @Html.Raw(item.BlogPostBody)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImagePath)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Published)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { Slug = item.Slug }) |
+                            @Html.ActionLink("Details", "Details", new { Slug = item.Slug }) |
+                            @Html.ActionLink("Delete", "Delete", new { Slug = item.Slug })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>
 

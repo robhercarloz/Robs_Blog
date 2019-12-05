@@ -216,6 +216,7 @@
     <Content Include="Images\imagePlaceholder.jpg" />
     <Content Include="Images\photography.png" />
     <Content Include="Images\profile_Placeholder.png" />
+    <Content Include="Images\whiteWoodBk.jpg" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-migrate-3.0.0.js" />

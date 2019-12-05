@@ -78,12 +78,8 @@
                             </a>
                         </div>
                     }
-
-
-                    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
-
-
-                </div><!-- END main-content -->
+                    <!-- END main-content -->
+                </div>
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
                 @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page, searchStr = ViewBag.Search }));
             </div>
