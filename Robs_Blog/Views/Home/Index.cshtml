@@ -59,7 +59,7 @@
                             <a href=@Url.Action("Details", "BlogPosts", new { slug = BlogPost.Slug }) class="blog-entry element-animate" data-animate-effect="fadeIn">
                                 @if (BlogPost.ImagePath != null)
                                 {
-                                    <img class="img-responsive" src="@BlogPost.ImagePath" alt="" />
+                                    <img class="img-responsive" src="@BlogPost.ImagePath" style="height: 220px; width: 330px;" alt="" />
                                 }
                                 else
                                 {
@@ -81,7 +81,7 @@
                     <!-- END main-content -->
                 </div>
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page, searchStr = ViewBag.Search }));
+                @Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page, searchStr = ViewBag.Search }))
             </div>
         </div>
     </div>

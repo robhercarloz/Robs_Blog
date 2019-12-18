@@ -200,6 +200,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\flaticon.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\ionicons.css" />
     <Content Include="Content\ionicons.min.css" />
     <Content Include="Content\owl.carousel.min.css" />
@@ -207,6 +208,7 @@
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\ionicons.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\aiBlur_blog.jpg" />
@@ -416,6 +418,13 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\ionicons.eot" />
+    <Content Include="fonts\ionicons.ttf" />
+    <Content Include="fonts\ionicons.woff" />
     <None Include="packages.config" />
     <Content Include="Scripts\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="Scripts\tinymce\skins\ui\oxide-dark\fonts\tinymce-mobile.woff" />
