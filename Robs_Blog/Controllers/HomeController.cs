@@ -86,7 +86,7 @@ namespace Robs_Blog.Controllers
                     };
                     var svc = new PersonalEmail();
                     await svc.SendAsync(email);
-                    return View("Index", "Home");
+                    return RedirectToAction("Index");
 
 
                 }
