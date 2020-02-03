@@ -23,7 +23,7 @@ namespace Robs_Blog.Controllers
             ViewBag.Search = searchStr;
             var blogList = IndexSearch(searchStr);
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
 
             return View(blogList.ToPagedList(pageNumber, pageSize));
